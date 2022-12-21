@@ -1,0 +1,53 @@
+specVersion: 0.0.4
+description: Thea protocol subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Registry
+    network: hardhat
+    source:
+      address:
+      abi: Registry
+      startBlock:
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Token
+      abis:
+        - name: Registry
+          file: ./abis/Registry.json
+      eventHandlers:
+        - event: Tokenized(indexed uint256,indexed bytes,indexed bytes)
+          handler: handleTokenized
+      file: ./src/mappings.ts
+
+  - kind: ethereum/contract
+    name: TheaERC1155
+    network: hardhat
+    source:
+      address:
+      abi: TheaERC1155
+      startBlock:
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Project
+        - Vintage
+        - Offset
+      abis:
+        - name: TheaERC1155
+          file: ./abis/TheaERC1155.json
+      eventHandlers:
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/mappings.ts

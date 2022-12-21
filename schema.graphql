@@ -1,0 +1,31 @@
+type User @entity {
+  id: ID!
+  tokens: [Token!]! @derivedFrom(field: "owner")
+}
+
+type Token @entity {
+  id: ID!
+  tokenURI: String!
+  project: Project!
+  vintage: Vintage!
+  amount: BigInt!
+  owner: User!
+  locked: Boolean!
+}
+
+type Project @entity {
+  id: ID!
+  tokens: [Token!]! @derivedFrom(field: "project")
+}
+
+type Vintage @entity {
+  id: ID!
+  tokens: [Token!]! @derivedFrom(field: "vintage")
+}
+
+type Offset @entity {
+  id: ID!
+  owner: User!
+  token: Token!
+  timeStamp: BigInt!
+}
