@@ -5,11 +5,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Registry
-    network: hardhat
+    network: mainnet
     source:
-      address:
+      address: '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318'
       abi: Registry
-      startBlock:
+      startBlock: 10
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -20,17 +20,44 @@ dataSources:
         - name: Registry
           file: ./abis/Registry.json
       eventHandlers:
-        - event: Tokenized(indexed uint256,indexed bytes,indexed bytes)
+        - event: Tokenized(indexed uint256,bytes,bytes,address,uint256)
           handler: handleTokenized
+        - event: Retired(indexed address,indexed uint256,uint256)
+          handler: handleRetired
+        - event: UpdatedUnwrapRequest(indexed uint256,uint8,uint256,address,uint256)
+          handler: handleUnwrap
+      file: ./src/mappings.ts
+
+  - kind: ethereum/contract
+    name: BaseTokenManager
+    network: mainnet
+    source:
+      address: '0xf41B47c54dEFF12f8fE830A411a09D865eBb120E'
+      abi: BaseTokenManager
+      startBlock: 15
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Token
+      abis:
+        - name: BaseTokenManager
+          file: ./abis/BaseTokenManager.json
+      eventHandlers:
+        - event: Converted(indexed uint256,uint256)
+          handler: handleConverted
+        - event: Recovered(indexed uint256,uint256)
+          handler: handleRecovered
       file: ./src/mappings.ts
 
   - kind: ethereum/contract
     name: TheaERC1155
-    network: hardhat
+    network: mainnet
     source:
-      address:
+      address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'
       abi: TheaERC1155
-      startBlock:
+      startBlock: 4
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

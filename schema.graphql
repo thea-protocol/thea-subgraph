@@ -1,31 +1,63 @@
 type User @entity {
   id: ID!
-  tokens: [Token!]! @derivedFrom(field: "owner")
+  balances: [TheaERC1155Balance!]! @derivedFrom(field: "owner")
+}
+
+type TheaERC1155 @entity(immutable: true) {
+  id: ID!
+  baseURI: String!
+  tokens: [Token!]! @derivedFrom(field: "contract")
 }
 
 type Token @entity {
   id: ID!
+  contract: TheaERC1155!
   tokenURI: String!
-  project: Project!
-  vintage: Vintage!
-  amount: BigInt!
-  owner: User!
-  locked: Boolean!
+  projectId: BigInt!
+  vintage: BigInt!
+  totalSupply: BigInt!
+  balances: [TheaERC1155Balance!]! @derivedFrom(field: "token")
+  convertEvents: [Converted!]! @derivedFrom(field: "token")
+  recoverEvents: [Recovered!]! @derivedFrom(field: "token")
+  retireEvents: [Retired!]! @derivedFrom(field: "token")
+  unwrapEvents: [Unwraped!]! @derivedFrom(field: "token")
 }
 
-type Project @entity {
+type TheaERC1155Balance @entity {
   id: ID!
-  tokens: [Token!]! @derivedFrom(field: "project")
-}
-
-type Vintage @entity {
-  id: ID!
-  tokens: [Token!]! @derivedFrom(field: "vintage")
-}
-
-type Offset @entity {
-  id: ID!
-  owner: User!
   token: Token!
-  timeStamp: BigInt!
+  owner: User!
+  amount: BigInt!
+}
+
+type Converted @entity(immutable: true) {
+  id: ID!
+  by: User!
+  token: Token!
+  amount: BigInt!
+  timestamp: BigInt!
+}
+
+type Recovered @entity(immutable: true) {
+  id: ID!
+  by: User!
+  token: Token!
+  amount: BigInt!
+  timestamp: BigInt!
+}
+
+type Retired @entity(immutable: true) {
+  id: ID!
+  by: User!
+  token: Token!
+  amount: BigInt!
+  timestamp: BigInt!
+}
+
+type Unwraped @entity(immutable: true) {
+  id: ID!
+  by: User!
+  token: Token!
+  amount: BigInt!
+  timestamp: BigInt!
 }
