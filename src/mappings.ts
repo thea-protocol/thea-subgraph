@@ -16,8 +16,8 @@ export function handleTokenized(event: Tokenized): void {
 
   const token = createToken(event.params.tokenId);
   token.contract = theaErc1155.id;
-  token.projectId = hexToBI(event.params.projectID.toHexString());
-  token.vintage = hexToBI(event.params.vintage.toHexString());
+  token.projectId = hexToBI(event.params.projectIDValue.toHexString());
+  token.vintage = hexToBI(event.params.vintageValue.toHexString());
   token.totalSupply = token.totalSupply.plus(event.params.amount);
   token.save();
 }

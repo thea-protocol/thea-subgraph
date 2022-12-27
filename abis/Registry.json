@@ -84,15 +84,27 @@
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "bytes",
         "name": "projectID",
         "type": "bytes"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "bytes",
         "name": "vintage",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "projectIDValue",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "vintageValue",
         "type": "bytes"
       },
       {
