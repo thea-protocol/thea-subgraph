@@ -22,7 +22,7 @@ dataSources:
       eventHandlers:
         - event: Tokenized(indexed uint256,indexed bytes,indexed bytes,bytes,bytes,address,uint256)
           handler: handleTokenized
-        - event: Retired(indexed address,indexed uint256,uint256)
+        - event: Retired(indexed address,indexed uint256,uint256,uint256)
           handler: handleRetired
         - event: UpdatedUnwrapRequest(indexed uint256,uint8,uint256,address,uint256)
           handler: handleUnwrap
