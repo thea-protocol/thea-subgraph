@@ -6,7 +6,8 @@
 5. Run docker compose up
 6. Download nodejs v16.17.0
 7. Clone this repo
-8. Run yearn install
+8. Set contract addresses in subgraph.yaml (registry address is most valuable)
+9. Run yarn install
 9. Run yarn codegen
 10. Run yarn build
 11. Run yarn create-local

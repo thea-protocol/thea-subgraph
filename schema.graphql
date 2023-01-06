@@ -13,9 +13,12 @@ type Token @entity {
   id: ID!
   contract: TheaERC1155!
   tokenURI: String!
-  projectId: BigInt!
+  projectId: String!
   vintage: BigInt!
-  totalSupply: BigInt!
+  activeAmount: BigInt!
+  mintedAmount: BigInt!
+  retiredAmount: BigInt!
+  unwrappedAmount: BigInt!
   balances: [TheaERC1155Balance!]! @derivedFrom(field: "token")
   convertEvents: [Converted!]! @derivedFrom(field: "token")
   recoverEvents: [Recovered!]! @derivedFrom(field: "token")

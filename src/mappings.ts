@@ -1,5 +1,6 @@
 import { TransferSingle, TransferBatch, URI } from './../generated/TheaERC1155/TheaERC1155';
 import { Converted, Recovered } from './../generated/BaseTokenManager/BaseTokenManager';
+//import { ethereum } from '@graphprotocol/graph-ts';
 import {
   Retired as RetireEvent,
   Converted as ConvertEvent,
@@ -16,9 +17,11 @@ export function handleTokenized(event: Tokenized): void {
 
   const token = createToken(event.params.tokenId);
   token.contract = theaErc1155.id;
-  token.projectId = hexToBI(event.params.projectIDValue.toHexString());
+  //token.projectId = ethereum.decode('(Bytes,string)', event.params.projectIDValue);
+  token.projectId = event.params.projectIDValue.toHexString();
   token.vintage = hexToBI(event.params.vintageValue.toHexString());
-  token.totalSupply = token.totalSupply.plus(event.params.amount);
+  token.activeAmount = token.activeAmount.plus(event.params.amount);
+  token.mintedAmount = token.mintedAmount.plus(event.params.amount);
   token.save();
 }
 
@@ -26,7 +29,8 @@ export function handleRetired(event: Retired): void {
   const user = createUser(event.params.from);
 
   const token = createToken(event.params.id);
-  token.totalSupply = token.totalSupply.minus(event.params.amount);
+  token.activeAmount = token.activeAmount.minus(event.params.amount);
+  token.retiredAmount = token.retiredAmount.plus(event.params.amount);
   token.save();
 
   const retireEvents = token.retireEvents;
@@ -88,7 +92,8 @@ export function handleURI(event: URI): void {
 export function handleUnwrap(event: UpdatedUnwrapRequest): void {
   const user = createUser(event.params.owner);
   const token = createToken(event.params.id);
-  token.totalSupply = token.totalSupply.minus(event.params.amount);
+  token.activeAmount = token.activeAmount.minus(event.params.amount);
+  token.unwrappedAmount = token.unwrappedAmount.plus(event.params.amount);
   token.save();
 
   const unwrapEvents = token.unwrapEvents;

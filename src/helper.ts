@@ -28,7 +28,10 @@ export function createToken(tokenId: BigInt): Token {
   if (token === null) {
     token = new Token(tokenId.toString());
     token.tokenURI = `${theaErc1155.baseURI}${tokenId.toString()}.json`;
-    token.totalSupply = integer.ZERO;
+    token.activeAmount = integer.ZERO;
+	token.mintedAmount = integer.ZERO;
+	token.retiredAmount = integer.ZERO;
+	token.unwrappedAmount = integer.ZERO;
   }
   return token;
 }
@@ -63,3 +66,4 @@ export function updateBalanceOnTransfer(from: Address, to: Address, tokenId: str
 export function hexToBI(hexString: string): BigInt {
   return BigInt.fromUnsignedBytes(changetype<Bytes>(Bytes.fromHexString(hexString).reverse()));
 }
+
