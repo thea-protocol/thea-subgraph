@@ -12,3 +12,16 @@
 10. Run yarn build
 11. Run yarn create-local
 12. Run yarn deploy-local
+13. Open http://localhost:8000/subgraphs/name/thea-protocol/thea-subgraph/graphql in your web-browser
+14. Try this query: {tokens {id}} it should return 
+```
+{
+  "data": {
+    "tokens": [
+      {
+        "id": "1"
+      }
+    ]
+  }
+}
+```
