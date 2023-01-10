@@ -8,7 +8,10 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 thea-protocol/thea-subgraph",
     "create-local": "graph create --node http://localhost:8020/ thea-protocol/thea-subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ thea-protocol/thea-subgraph",
-    "redeploy-local": "yarn remove-local && yarn build && yarn create-local && yarn deploy-local"
+    "redeploy-local": "yarn remove-local && yarn build && yarn create-local && yarn deploy-local",
+    "deploy-docker": "graph deploy --node http://graph-node:8020/ --ipfs http://ipfs:5001 thea-protocol/thea-subgraph --version-label 0.1",
+    "create-docker": "graph create --node http://graph-node:8020/ thea-protocol/thea-subgraph",
+    "remove-docker": "graph remove --node http://graph-node:8020/ thea-protocol/thea-subgraph"
   },
   "repository": {
     "type": "git",
