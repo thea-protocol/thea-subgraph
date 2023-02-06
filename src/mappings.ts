@@ -1,6 +1,6 @@
 import { TransferSingle, TransferBatch, URI } from './../generated/TheaERC1155/TheaERC1155';
 import { Converted, Recovered } from './../generated/BaseTokenManager/BaseTokenManager';
-//import { ethereum } from '@graphprotocol/graph-ts';
+import { ethereum } from '@graphprotocol/graph-ts';
 import {
   Retired as RetireEvent,
   Converted as ConvertEvent,
@@ -17,8 +17,10 @@ export function handleTokenized(event: Tokenized): void {
 
   const token = createToken(event.params.tokenId);
   token.contract = theaErc1155.id;
-  //token.projectId = ethereum.decode('(Bytes,string)', event.params.projectIDValue);
-  token.projectId = event.params.projectIDValue.toHexString();
+  // decoding will not fail as project ID is always encoded as string
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const projectId = ethereum.decode('string', event.params.projectIDValue)!;
+  token.projectId = projectId.toString();
   token.vintage = hexToBI(event.params.vintageValue.toHexString());
   token.activeAmount = token.activeAmount.plus(event.params.amount);
   token.mintedAmount = token.mintedAmount.plus(event.params.amount);
