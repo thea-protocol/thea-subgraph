@@ -165,6 +165,51 @@
     "inputs": [
       {
         "indexed": true,
+        "internalType": "address",
+        "name": "newBTMDeployer",
+        "type": "address"
+      }
+    ],
+    "name": "UpdatedBTMDeployer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "newRating",
+        "type": "bytes"
+      }
+    ],
+    "name": "UpdatedRating",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newTreasury",
+        "type": "address"
+      }
+    ],
+    "name": "UpdatedTreasury",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "internalType": "uint256",
         "name": "requestId",
         "type": "uint256"
@@ -218,6 +263,19 @@
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "btmDeployer",
+    "outputs": [
+      {
+        "internalType": "contract BaseTokenManagerDeployer",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -305,6 +363,11 @@
       {
         "internalType": "contract TheaERC1155",
         "name": "theaERC1155_",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "treasury_",
         "type": "address"
       }
     ],
@@ -591,6 +654,32 @@
   {
     "inputs": [
       {
+        "internalType": "contract BaseTokenManagerDeployer",
+        "name": "newBTMDeployer",
+        "type": "address"
+      }
+    ],
+    "name": "setBTMDeployer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newTreasury",
+        "type": "address"
+      }
+    ],
+    "name": "setTreasury",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes4",
         "name": "interfaceId",
         "type": "bytes4"
@@ -649,6 +738,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "treasury",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -688,6 +790,24 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "newRatingValue",
+        "type": "bytes"
+      }
+    ],
+    "name": "updateRating",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
