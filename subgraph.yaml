@@ -32,7 +32,7 @@ dataSources:
     name: BaseTokenManager
     network: mainnet
     source:
-      address: '0xf41B47c54dEFF12f8fE830A411a09D865eBb120E'
+      address: '0xe100c4ffff7c00253ba4a2a695f5ac909d756d76'
       abi: BaseTokenManager
       startBlock: 15
     mapping:
@@ -47,7 +47,7 @@ dataSources:
       eventHandlers:
         - event: Converted(indexed uint256,uint256)
           handler: handleConverted
-        - event: Recovered(indexed uint256,uint256)
+        - event: Recovered(indexed uint256,uint256,address)
           handler: handleRecovered
       file: ./src/mappings.ts
 
@@ -55,7 +55,7 @@ dataSources:
     name: TheaERC1155
     network: mainnet
     source:
-      address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'
+      address: '0x2e1f232a9439c3d459fceca0beef13acc8259dd8'
       abi: TheaERC1155
       startBlock: 4
     mapping:

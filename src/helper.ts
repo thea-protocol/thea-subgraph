@@ -2,7 +2,7 @@ import { address, integer } from '@protofire/subgraph-toolkit';
 import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import { TheaERC1155, TheaERC1155Balance, Token, User } from '../generated/schema';
 
-const THEA_ERC1155 = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9';
+const THEA_ERC1155 = '0x2e1f232a9439c3d459fceca0beef13acc8259dd8';
 
 export function createUser(address: Address): User {
   let user = User.load(address.toHex());
@@ -29,9 +29,9 @@ export function createToken(tokenId: BigInt): Token {
     token = new Token(tokenId.toString());
     token.tokenURI = `${theaErc1155.baseURI}${tokenId.toString()}.json`;
     token.activeAmount = integer.ZERO;
-	token.mintedAmount = integer.ZERO;
-	token.retiredAmount = integer.ZERO;
-	token.unwrappedAmount = integer.ZERO;
+    token.mintedAmount = integer.ZERO;
+    token.retiredAmount = integer.ZERO;
+    token.unwrappedAmount = integer.ZERO;
   }
   return token;
 }
@@ -66,4 +66,3 @@ export function updateBalanceOnTransfer(from: Address, to: Address, tokenId: str
 export function hexToBI(hexString: string): BigInt {
   return BigInt.fromUnsignedBytes(changetype<Bytes>(Bytes.fromHexString(hexString).reverse()));
 }
-

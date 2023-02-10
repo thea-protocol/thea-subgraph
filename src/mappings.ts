@@ -35,8 +35,9 @@ export function handleRetired(event: Retired): void {
   token.retiredAmount = token.retiredAmount.plus(event.params.amount);
   token.save();
 
-  const retireEvents = token.retireEvents;
-  const retireEvent = new RetireEvent(token.id.concat('-').concat(retireEvents.length.toString()));
+  const retireEvent = new RetireEvent(
+    `${token.id}-${event.block.number.toString()}-${event.transaction.index.toString()}`
+  );
   retireEvent.by = user.id;
   retireEvent.token = token.id;
   retireEvent.amount = event.params.amount;
@@ -48,8 +49,9 @@ export function handleConverted(event: Converted): void {
   const user = createUser(event.transaction.from);
   const token = createToken(event.params.tokenId);
 
-  const convertEvents = token.convertEvents;
-  const convertEvent = new ConvertEvent(token.id.concat('-').concat(convertEvents.length.toString()));
+  const convertEvent = new ConvertEvent(
+    `${token.id}-${event.block.number.toString()}-${event.transaction.index.toString()}`
+  );
   convertEvent.by = user.id;
   convertEvent.token = token.id;
   convertEvent.amount = event.params.amount;
@@ -58,12 +60,13 @@ export function handleConverted(event: Converted): void {
 }
 
 export function handleRecovered(event: Recovered): void {
-  const user = createUser(event.transaction.from);
+  const owner = createUser(event.params.owner);
   const token = createToken(event.params.tokenId);
 
-  const recoverEvents = token.recoverEvents;
-  const recoverEvent = new RecoverEvent(token.id.concat('-').concat(recoverEvents.length.toString()));
-  recoverEvent.by = user.id;
+  const recoverEvent = new RecoverEvent(
+    `${token.id}-${event.block.number.toString()}-${event.transaction.index.toString()}`
+  );
+  recoverEvent.by = owner.id;
   recoverEvent.token = token.id;
   recoverEvent.amount = event.params.amount;
   recoverEvent.timestamp = event.block.timestamp;
@@ -98,8 +101,9 @@ export function handleUnwrap(event: UpdatedUnwrapRequest): void {
   token.unwrappedAmount = token.unwrappedAmount.plus(event.params.amount);
   token.save();
 
-  const unwrapEvents = token.unwrapEvents;
-  const unwrapEvent = new Unwraped(token.id.concat('-').concat(unwrapEvents.length.toString()));
+  const unwrapEvent = new Unwraped(
+    `${token.id}-${event.block.number.toString()}-${event.transaction.index.toString()}`
+  );
   unwrapEvent.by = user.id;
   unwrapEvent.token = token.id;
   unwrapEvent.amount = event.params.amount;
