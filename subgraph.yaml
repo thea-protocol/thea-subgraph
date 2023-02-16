@@ -7,7 +7,7 @@ dataSources:
     name: Registry
     network: mainnet
     source:
-      address: '0xe135783649bfa7c9c4c6f8e528c7f56166efc8a6'
+      address: '0x686afd6e502a81d2e77f2e038a23c0def4949a20'
       abi: Registry
       startBlock: 10
     mapping:
@@ -32,7 +32,7 @@ dataSources:
     name: BaseTokenManager
     network: mainnet
     source:
-      address: '0xe100c4ffff7c00253ba4a2a695f5ac909d756d76'
+      address: '0x95c8f889701f20b624875a5188bebdc9289b4f51'
       abi: BaseTokenManager
       startBlock: 15
     mapping:
@@ -55,7 +55,7 @@ dataSources:
     name: TheaERC1155
     network: mainnet
     source:
-      address: '0x2e1f232a9439c3d459fceca0beef13acc8259dd8'
+      address: '0xe135783649bfa7c9c4c6f8e528c7f56166efc8a6'
       abi: TheaERC1155
       startBlock: 4
     mapping:
